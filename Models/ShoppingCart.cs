@@ -3,17 +3,18 @@ using System.Collections.Generic;
 
 namespace LanguageFeatures.Models
 {
-    public class ShoppingCart : IEnumerable<Product>
+    public class ShoppingCart : IProductSelection
     {
-        public IEnumerable<Product> Products { get; set; }
-        public IEnumerator<Product> GetEnumerator()
-        {
-            return Products.GetEnumerator();
-        }
+        private readonly List<Product> _products = new List<Product>();
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public ShoppingCart(params Product[] prods)
         {
-            return GetEnumerator();
+            _products.AddRange(prods);
+        }
+        
+        public IEnumerable<Product> Products
+        {
+            get => _products;
         }
     }
 }
