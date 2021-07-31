@@ -34,8 +34,12 @@ namespace LanguageFeatures.Controllers
                 new Product {Name = "Cornet flag", Price = 34.50M}
             };
             decimal arrayTotal = productArray.FilterByPrice(10).TotalPrices();
+            decimal nameFilterTotal = productArray.FilterByName('S').TotalPrices();
             
-            return View("Index", new string[] {$"Total: {cartTotal:C2}", $"Array total: {arrayTotal:C2}"});
+            return View("Index", new string[] {$"Total: {cartTotal:C2}",
+                $"Array total: {arrayTotal:C2}",
+                $"Array total where items start with S: {nameFilterTotal:C2}"
+            });
         }
     }
 }
