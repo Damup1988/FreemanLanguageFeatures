@@ -12,17 +12,15 @@ namespace LanguageFeatures.Controllers
         //public ViewResult Index() => View(Product.GetProducts().Select(p => p?.Name));
         public async Task<ViewResult> Index()
         {
-            List<string> output = new List<string>();
-            await foreach(long? len in MyAsyncMethods.GetPageLength(
-                output,
-                "apress.com",
-                "microsoft.com",
-                "amazon.com"))
+            var products = new[]
             {
-                output.Add($"Page length: {len}");
-            }
-
-            return View(output);
+                new {Name = "Kayak", Price = 150M},
+                new {Name = "Lifejacket", Price = 200M},
+                new {Name = "Soccer ball", Price = 50.50M},
+                new {Name = "Corner glaf", Price = 10M}
+            };
+            return View(products.Select(p => 
+                $"{nameof(p.Name)}: {p.Name}, {nameof(p.Price)}: {p.Price}"));
         }
     }
 }
